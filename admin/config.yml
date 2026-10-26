@@ -2,7 +2,7 @@
 # غيّر السطر التالي فقط: اسم-حسابك/اسم-المستودع  (مثال: ali-news/alwareth-news)
 backend:
   name: github
-  repo: YOUR-USERNAME/YOUR-REPO
+  repo: alwarithnewsagency-gif/alwareth
   branch: main
 
 app_title: وكالة الوارث نيوز
