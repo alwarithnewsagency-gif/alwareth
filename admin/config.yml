@@ -1,0 +1,51 @@
+# ===== إعداد لوحة التحكم =====
+# غيّر السطر التالي فقط: اسم-حسابك/اسم-المستودع  (مثال: ali-news/alwareth-news)
+backend:
+  name: github
+  repo: YOUR-USERNAME/YOUR-REPO
+  branch: main
+
+app_title: وكالة الوارث نيوز
+logo:
+  src: ../images/emblem.png
+
+# مكان حفظ الصور المرفوعة والمسار الذي يُكتب في الخبر
+media_folder: images/uploads
+public_folder: /images/uploads
+
+# تحويل الصور تلقائيًا إلى WebP لتخفيف حجمها وتسريع الموقع
+media_libraries:
+  default:
+    config:
+      transformations:
+        raster_image:
+          format: webp
+          quality: 85
+
+collections:
+  - name: news
+    label: الأخبار
+    files:
+      - name: news
+        label: أخبار الموقع
+        file: content/news.json
+        format: json
+        fields:
+          - name: items
+            label: الأخبار
+            label_singular: خبر
+            widget: list
+            add_to_top: true
+            summary: "{{fields.title}}"
+            fields:
+              - { name: title, label: عنوان الخبر, widget: string }
+              - { name: date, label: تاريخ النشر, widget: datetime, default: "{{now}}" }
+              - name: category
+                label: القسم
+                widget: select
+                options: [محلية, سياسة, اقتصاد, رياضة, ثقافة, تقنية, منوعات]
+                default: محلية
+              - { name: breaking, label: خبر عاجل (يظهر في الشريط الأحمر), widget: boolean, default: false }
+              - { name: image, label: صورة الخبر, widget: image }
+              - { name: body, label: نص الخبر (اترك سطرًا فارغًا بين الفقرات), widget: text }
+              - { name: published, label: منشور (أزل العلامة لإخفاء الخبر مؤقتًا), widget: boolean, default: true }
